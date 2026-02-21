@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_impresora_graph" model="ir.ui.view">
+        <field name="name">impresora.graph</field>
+        <field name="model">impresion.impresora</field>
+        <field name="arch" type="xml">
+            <graph string="Análisis de Impresión" type="bar">
+                <field name="tecnologia"/>
+                <field name="num_impresiones" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+</odoo>

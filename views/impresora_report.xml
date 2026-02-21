@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_ficha_impresora" model="ir.actions.report">
+        <field name="name">Ficha Técnica</field>
+        <field name="model">impresion.impresora</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gestion_impresoras.report_ficha_impresora</field>
+        <field name="report_file">gestion_impresoras.report_ficha_impresora</field>
+        <field name="print_report_name">'Ficha - %s' % object.name</field>
+        <field name="binding_model_id" ref="model_impresion_impresora"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_ficha_impresora">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="row mt-4">
+                            <div class="col-8">
+                                <h1 style="color: #008784;"><span t-field="o.name"/></h1>
+                                <h3><small class="text-muted">Modelo: </small><span t-field="o.modelo"/></h3>
+                            </div>
+                            <div class="col-4 text-end">
+                                <t t-if="o.foto">
+                                    <img t-att-src="image_data_uri(o.foto)" style="max-height: 140px; border: 1px solid #ccc; padding: 5px;"/>
+                                </t>
+                            </div>
+                        </div>
+
+                        <hr/>
+
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header bg-light"><strong>Datos Técnicos</strong></div>
+                                    <div class="card-body">
+                                        <p><strong>Tecnología:</strong> <span t-field="o.tecnologia"/></p>
+                                        <p><strong>Fecha Compra:</strong> <span t-field="o.fecha_compra"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header bg-light"><strong>Estado Actual</strong></div>
+                                    <div class="card-body">
+                                        <p>
+                                            <strong>Estado: </strong>
+                                            <span t-field="o.estado" class="badge rounded-pill text-bg-info"/>
+                                        </p>
+                                        <p><strong>Contador:</strong> <span t-field="o.num_impresiones"/> impresiones</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div t-if="o.necesita_mantenimiento" class="alert alert-danger mt-5 text-center">
+                            <h3>⚠️ ATENCIÓN</h3>
+                            <p>Esta máquina ha superado el límite de seguridad y requiere revisión técnica inmediata.</p>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
