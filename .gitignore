@@ -1,0 +1,27 @@
+# Archivos temporales de Python
+*.pyc
+__pycache__/
+
+# Archivos de configuración local
+*.log
+*.sqlite3
+*.db
+*.swp
+
+# Archivos de entorno virtual (si está dentro del proyecto)
+venv/
+env/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de editor
+.vscode/
+.idea/
+*.code-workspace
+
+# Archivos de Odoo que no deben versionarse
+*.zip
+*.bak
+*.tmp
