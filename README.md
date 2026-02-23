@@ -1,12 +1,12 @@
 # Gestión de Impresoras 3D - Módulo para Odoo 19
 
-Bienvenido al equipo de desarrollo. Este proyecto tiene como objetivo crear un módulo para Odoo 19 que gestione el inventario, estado y consumibles de un parque de impresoras 3D.
+Este proyecto tiene como objetivo crear un módulo para Odoo 19 que gestione el inventario, estado y consumibles de impresoras 3D.
 
 Este proyecto ha sido desarrollado por **Diego, Roberto, Javier y Mario**.
 
 ## Índice
 1. [Información General del Proyecto](#1-información-general-del-proyecto)
-2. [Problemática y Solución](#2-problemática-y-solución)
+2. [Descripción de la empresa](#2-descripción-de-la-empresa)
 3. [Funcionalidades Principales](#3-funcionalidades-principales)
 4. [Estructura del Proyecto](#4-estructura-del-proyecto)
 5. [Tecnologías Utilizadas](#5-tecnologías-utilizadas)
@@ -34,21 +34,19 @@ Este proyecto ha sido desarrollado por **Diego, Roberto, Javier y Mario**.
 ### Contexto Académico
 Este proyecto ha sido desarrollado como trabajo práctico de la asignatura **SGE (Sistemas de Gestión Empresarial)** del curso **2º DAM (Desarrollo de Aplicaciones Multiplataforma)**. Demuestra la capacidad de trabajar en equipo mediante control de versiones (Git/GitHub) y el desarrollo nativo en el framework de Odoo.
 
-## 2. Problemática y Solución
+## 2. Descripción de la empresa
 
-### Problema que Resuelve
-Los laboratorios de impresión 3D (granjas de impresoras) y los talleres maker se enfrentan a problemas de organización diaria:
-* **Descontrol de estados:** No se sabe de un vistazo qué máquinas están imprimiendo, cuáles están libres y cuáles están averiadas.
-* **Falta de mantenimiento:** Se pierde el hilo de cuántas impresiones lleva una máquina y cuándo necesita revisión técnica.
-* **Caos de consumibles:** Las bobinas de filamento o botellas de resina se gastan o se pierden, y no hay un registro de qué material está asignado a qué impresora.
+### Actividad
+**Nova Parts 3D S.L.** es una empresa ubicada en Guadalajara dedicada a la impresión 3D de piezas personalizadas, orientada al sector B2B (ingeniería, automoción y prototipado rápido). Cuentan con un equipo de 15 empleados distribidos en Dirección, Diseño, Ventas y Producción.
 
-### Solución Implementada
-Este módulo soluciona estos problemas centralizando la información y proporcionando:
-* **Registro automatizado** del inventario físico de máquinas.
-* **Control de consumibles (Bobinas)**, relacionando directamente cada rollo de plástico con su impresora actual.
-* **Panel Kanban interactivo** para cambiar el estado de las impresoras arrastrando y soltando (Drag & Drop).
-* **Ficha técnica en PDF** imprimible para pegar físicamente en cada máquina.
-* **Gráficos estadísticos** para analizar la carga de trabajo de cada tecnología.
+### Necesidades detectadas
+La empresa se enfrenta a graves problemas de organización diaria en su taller:
+* **Descontrol de estados:** El Almacén y Producción no saben de un vistazo qué máquinas están imprimiendo, cuáles están libres y cuáles averiadas.
+* **Falta de mantenimiento:** Se pierde el hilo de la carga de trabajo de cada máquina.
+* **Caos de consumibles:** No hay un registro en tiempo real de qué material (bobinas de PLA, resinas) está asignado a qué impresora.
+
+### Justificación del módulo
+La empresa dispone de un presupuesto inicial de 3.000€ y necesita una solución web multiusuario. El desarrollo de este módulo para Odoo 19 se justifica porque centraliza el inventario físico (hardware) y los consumibles en una sola plataforma, permitiendo reducir errores, mejorar la trazabilidad y sentar las bases para una futura integración con los módulos de Ventas y Facturación de Odoo.
 
 ---
 
@@ -194,3 +192,50 @@ El archivo `security/ir.model.access.csv` garantiza los niveles de seguridad de 
 3. **Instalar el módulo:** * En el buscador de aplicaciones (borrando el filtro por defecto), buscar "Gestión de Impresoras 3D".
    * Hacer clic en **Instalar**.
 4. **Comenzar a usar:** * Navegar al nuevo menú principal "Impresoras 3D" para registrar tu primera máquina y sus bobinas asociadas.
+
+
+## 11. Uso de Git
+
+### Explicación del flujo de trabajo
+Para el desarrollo de este módulo, hemos simulado un entorno de producción real utilizando Git. Hemos aplicado un flujo de trabajo basado en ramas (Branching):
+1. **Ramas individuales:** Se crearon 4 ramas separadas (`rama_diego`, `rama_roberto`, `rama_javier`, `rama_mario`).
+2. **Desarrollo aislado:** Cada miembro del equipo programó y probó su parte del código (modelos, vistas, seguridad) en su propia rama para no interferir con el trabajo del resto.
+3. **Integración (Merge):** Una vez validadas las funcionalidades, el líder del proyecto realizó las fusiones (`git merge`) hacia la rama principal (`master` / `main`), resolviendo los conflictos de código de forma colaborativa.
+
+---
+
+## 12. Pruebas
+
+### Instalación del módulo
+La instalación se ha realizado con éxito en un entorno local de Odoo 19 sobre Windows y PostgreSQL, activando el modo desarrollador y actualizando la lista de aplicaciones.
+
+### Funcionamiento general y Creación de registros
+Se han realizado pruebas funcionales de todo el flujo (CRUD):
+1. **Creación:** Se han registrado impresoras (ej. Prusa MK4, Ender 3) y bobinas (PLA, Resina).
+2. **Relación:** Se ha comprobado que el campo `Many2one` asigna correctamente la bobina a la impresora.
+3. **Vistas:** Se ha verificado el Drag & Drop en la vista Kanban y el filtrado en la vista List.
+4. **Reportes:** Se han generado los PDF correctamente y los gráficos muestran los cálculos estadísticos.
+
+### Capturas de Vistas y Menús
+*(Añadir aquí capturas de pantalla del módulo funcionando).*
+![Vista Kanban](img/inicio.png)
+![Vista Formulario](img/formulario.png)
+![Ficha PDF](img/pdf.png)
+
+---
+
+## 13. Conclusiones
+
+### Aprendizajes
+* **Arquitectura MVC en ERPs:** Hemos comprendido cómo Odoo separa la lógica (Python/PostgreSQL) de la interfaz (XML).
+* **ORM de Odoo:** Hemos aprendido a crear tablas y relaciones (Many2one) sin necesidad de escribir sentencias SQL directas.
+* **Trabajo en equipo:** El uso de Git con ramas nos ha enseñado a gestionar conflictos de código y coordinar el desarrollo.
+
+### Dificultades
+* **Versiones de Odoo:** La mayor dificultad técnica fue la migración de la vista `<tree>` (usada en versiones anteriores) a la nueva etiqueta `<list>` obligatoria en Odoo 19, lo cual nos obligó a depurar errores del servidor y leer la documentación oficial.
+* **Generación de PDFs:** Configurar `wkhtmltopdf` en el entorno de desarrollo y lograr que el motor QWeb renderizara correctamente las imágenes binarias (`widget="image"`) en el documento final.
+
+### Mejoras futuras
+Como propuesta de mejora para siguientes fases de implantación en *Nova Parts 3D S.L.*, proponemos:
+1. Conectar el módulo de Impresoras con el módulo de **Mantenimiento** nativo de Odoo para automatizar avisos técnicos.
+2. Integrar el coste de las bobinas con el módulo de **Ventas**, para calcular automáticamente el coste de impresión por pieza para el cliente final.
