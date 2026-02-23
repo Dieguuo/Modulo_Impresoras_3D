@@ -15,6 +15,9 @@ Este proyecto ha sido desarrollado por **Diego, Roberto, Javier y Mario**.
 8. [Sistema de Reportes](#8-sistema-de-reportes)
 9. [Seguridad y Permisos](#9-seguridad-y-permisos)
 10. [Instalación y Configuración](#10-instalación-y-configuración)
+11. [Uso de Git](#11-uso-de-git)
+12. [Pruebas](#12-pruebas)
+13. [Conclusiones](#13-conclusiones)
 
 ---
 
